@@ -62,3 +62,23 @@ form.addEventListener("submit", async (event) => {
 	document.body.appendChild(frame.frame);
 	frame.go(url);
 });
+
+// Deep link from SchoolOS: /?e=brave&q=hello auto-searches on load.
+(function () {
+  const p = new URLSearchParams(location.search);
+  if (!p.get("q")) return;
+  const ENG = {
+    bing: "https://www.bing.com/search?q=%s",
+    ddg: "https://duckduckgo.com/?q=%s",
+    brave: "https://search.brave.com/search?q=%s",
+    google: "https://www.google.com/search?q=%s",
+    mojeek: "https://www.mojeek.com/search?q=%s",
+    startpage: "https://www.startpage.com/sp/search?query=%s",
+    yahoo: "https://search.yahoo.com/search?p=%s",
+    ecosia: "https://www.ecosia.org/search?q=%s",
+    qwant: "https://www.qwant.com/?q=%s"
+  };
+  if (p.get("e") && ENG[p.get("e")]) searchEngine.value = ENG[p.get("e")];
+  address.value = p.get("q");
+  form.requestSubmit();
+})();
