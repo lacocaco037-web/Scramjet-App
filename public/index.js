@@ -63,7 +63,6 @@ form.addEventListener("submit", async (event) => {
 	frame.go(url);
 });
 
-// Deep link from SchoolOS: /?e=brave&q=hello auto-searches on load.
 (function () {
   const p = new URLSearchParams(location.search);
   if (!p.get("q")) return;
